@@ -9,4 +9,5 @@
     <string name="dog_breed_quiz">Dog breed quiz</string>
     <string name="answer">Answer</string>
     <string name="send">Send</string>
+    <string name="question_text">Which type of dog breed is this?</string>
 </resources>
