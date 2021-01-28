@@ -2,11 +2,15 @@ package com.hvl.dat153.dogquiz;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.hvl.dat153.dogquiz.Contract.*;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "DogQuiz.db";
@@ -69,4 +73,43 @@ public class DbHelper extends SQLiteOpenHelper {
         cv.put(QuestionsTable.COLUMN_ANSWER_NO, question.getAnswerNo());
         db.insert(QuestionsTable.TABLE_NAME, null, cv);
     }
+
+    public List<Questions> getAllQuestions() {
+        List<Questions> questionList = new ArrayList<>();
+        db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME, null);
+
+        if(c.moveToFirst()) {
+            do {
+                Questions question = new Questions();
+                question.setQuestion(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
+                question.setOption1(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
+                question.setOption1(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
+                question.setOption2(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION2)));
+                question.setOption3(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION3)));
+                question.setAnswerNo(c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_ANSWER_NO)));
+                questionList.add(question);
+            } while (c.moveToNext());
+        }
+        c.close();
+        return questionList;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
