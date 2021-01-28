@@ -8,7 +8,7 @@
     tools:context=".quizActivity">
 
     <TextView
-        android:id="@+id/score"
+        android:id="@+id/textViewScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -33,7 +33,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/score" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewScore" />
 
     <TextView
         android:id="@+id/question_text"
@@ -92,7 +92,6 @@
         android:layout_marginTop="586dp"
         android:layout_marginEnd="159dp"
         android:layout_marginBottom="97dp"
-        android:onClick="sendAnswer"
         android:text="@string/answer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
