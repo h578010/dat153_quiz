@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
+    <!--String resource instead of hardcoding name of app?-->
     <TextView
         android:id="@+id/header1"
         android:layout_width="220dp"
         android:layout_height="42dp"
         android:layout_marginTop="120dp"
-        android:text="Dog breed quiz"
+        android:text="@string/dog_breed_quiz"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#F900FE"
+        android:textColor="@color/pink"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -43,7 +45,7 @@
         android:layout_marginTop="460dp"
         android:layout_marginEnd="146dp"
         android:layout_marginBottom="180dp"
-        android:backgroundTint="#35C62C"
+        android:backgroundTint="@color/green"
         android:onClick="startQuiz"
         android:text="Start quiz"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +61,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="135dp"
         android:layout_marginBottom="122dp"
-        android:backgroundTint="#35C62C"
+        android:backgroundTint="@color/green"
         android:onClick="addPics"
         android:text="Add pictures"
         app:layout_constraintBottom_toBottomOf="parent"
