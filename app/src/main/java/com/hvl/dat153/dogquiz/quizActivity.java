@@ -1,5 +1,6 @@
 package com.hvl.dat153.dogquiz;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class quizActivity extends AppCompatActivity {
+    public static final String EXTRA_SCORE = "extraScore";
     private TextView textViewQuestion;
     private TextView textViewScore;
     private TextView textViewCount;
@@ -97,7 +99,7 @@ public class quizActivity extends AppCompatActivity {
         int answerNo = group.indexOfChild(rBtnSelected)+1;
         if (answerNo == currentQuestion.getAnswerNo()) {
             score ++;
-            textViewScore.setText("Score: " + score);
+            textViewScore.setText("Score: " + score + "/" + questionCountTotal);
         }
         showSolution();
     }
@@ -128,6 +130,9 @@ public class quizActivity extends AppCompatActivity {
     }
 
     private void finishQuiz() {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(EXTRA_SCORE, score);
+        setResult(RESULT_OK, resultIntent);
         finish();
     }
 
