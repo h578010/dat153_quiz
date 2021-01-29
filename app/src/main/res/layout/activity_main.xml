@@ -7,7 +7,21 @@
     android:background="@color/background"
     tools:context=".MainActivity">
 
-    <!--String resource instead of hardcoding name of app?-->
+    <TextView
+        android:id="@+id/text_view_highscore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="298dp"
+        android:layout_marginBottom="93dp"
+        android:text="Highscore: 0"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/header1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/header1"
         android:layout_width="wrap_content"
@@ -35,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/vilja" />
+        app:srcCompat="@drawable/vilj" />
 
     <Button
         android:id="@+id/button_start"
@@ -46,7 +60,6 @@
         android:layout_marginEnd="146dp"
         android:layout_marginBottom="180dp"
         android:backgroundTint="@color/green"
-        android:onClick="startQuiz"
         android:text="Start quiz"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

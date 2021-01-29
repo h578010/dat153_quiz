@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textViewHighscore = findViewById(R.id.textViewScore);
+        textViewHighscore = findViewById(R.id.text_view_highscore);
         loadHighscore();
 
         Button buttonStart = findViewById(R.id.button_start);
