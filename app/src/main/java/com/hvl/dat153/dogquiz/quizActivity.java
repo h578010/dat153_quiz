@@ -52,6 +52,7 @@ public class quizActivity extends AppCompatActivity {
         DbHelper dbHelper = new DbHelper(this);
         questionList = dbHelper.getAllQuestions();
         questionCountTotal = questionList.size();
+        textViewScore.setText("Score: " + score + "/" + questionCountTotal);
         // Collections.shuffle(questionList);
 
         showNextQuestion();
