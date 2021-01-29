@@ -117,9 +117,11 @@ public class quizActivity extends AppCompatActivity {
             case 2:
                 rBtn2.setTextColor(Color.GREEN);
                 textViewQuestion.setText("Answer 2 is correct.");
+                break;
             case 3:
                 rBtn3.setTextColor(Color.GREEN);
                 textViewQuestion.setText("Answer 3 is correct.");
+                break;
         }
 
         if (questionCounter < questionCountTotal) {
