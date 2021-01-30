@@ -16,11 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
-public class quizActivity extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivity {
     public static final String EXTRA_SCORE = "extraScore";
     private TextView textViewQuestion;
     private ImageView questionImage;
-    private ImageView myImageView;
     private TextView textViewScore;
     private TextView textViewCount;
     private RadioGroup group;
@@ -43,7 +42,6 @@ public class quizActivity extends AppCompatActivity {
 
         textViewQuestion = findViewById(R.id.question_text);
         questionImage = findViewById(R.id.question_image);
-        myImageView = (ImageView) questionImage;
         textViewScore = findViewById(R.id.textViewScore);
         textViewCount = findViewById(R.id.count);
         group = findViewById(R.id.radio_group);
@@ -68,7 +66,7 @@ public class quizActivity extends AppCompatActivity {
                     if (rBtn1.isChecked() || rBtn2.isChecked() || rBtn3.isChecked()) {
                         checkAnswer();
                     } else {
-                        Toast.makeText(quizActivity.this, "Please select an answer", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizActivity.this, "Please select an answer", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     showNextQuestion();
@@ -87,7 +85,7 @@ public class quizActivity extends AppCompatActivity {
             currentQuestion = questionList.get(questionCounter);
             textViewQuestion.setText("Which type of breed is this?");
 
-            myImageView.setImageResource(currentQuestion.getResourceId());
+            questionImage.setImageResource(currentQuestion.getResourceId());
             rBtn1.setText(currentQuestion.getOption1());
             rBtn2.setText(currentQuestion.getOption2());
             rBtn3.setText(currentQuestion.getOption3());

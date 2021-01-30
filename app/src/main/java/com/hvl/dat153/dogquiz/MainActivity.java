@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startQuiz() {
-        Intent i = new Intent(MainActivity.this, quizActivity.class);
+        Intent i = new Intent(MainActivity.this, QuizActivity.class);
         startActivityForResult(i, REQUEST_CODE_QUIZ);
     }
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_CODE_QUIZ) {
             if (resultCode == RESULT_OK) {
-                int score = data.getIntExtra(quizActivity.EXTRA_SCORE, 0);
+                int score = data.getIntExtra(QuizActivity.EXTRA_SCORE, 0);
                 if (score > highscore) {
                     updateHighscore(score);
                 }
