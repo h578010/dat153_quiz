@@ -6,18 +6,21 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import java.util.Collections;
+
 import java.util.List;
 
 public class quizActivity extends AppCompatActivity {
     public static final String EXTRA_SCORE = "extraScore";
     private TextView textViewQuestion;
+    private ImageView questionImage;
+    private ImageView myImageView;
     private TextView textViewScore;
     private TextView textViewCount;
     private RadioGroup group;
@@ -26,10 +29,10 @@ public class quizActivity extends AppCompatActivity {
     private RadioButton rBtn3;
     private Button answerBtn;
     private ColorStateList textColorDefault;
-    private List<Questions> questionList;
+    private List<Question> questionList;
     private int questionCounter;
     private int questionCountTotal;
-    private Questions currentQuestion;
+    private Question currentQuestion;
     private boolean answered;
     private int score;
 
@@ -39,6 +42,8 @@ public class quizActivity extends AppCompatActivity {
         setContentView(R.layout.quiz_activity);
 
         textViewQuestion = findViewById(R.id.question_text);
+        questionImage = findViewById(R.id.question_image);
+        myImageView = (ImageView) questionImage;
         textViewScore = findViewById(R.id.textViewScore);
         textViewCount = findViewById(R.id.count);
         group = findViewById(R.id.radio_group);
@@ -80,7 +85,9 @@ public class quizActivity extends AppCompatActivity {
 
         if (questionCounter < questionCountTotal) {
             currentQuestion = questionList.get(questionCounter);
-            textViewQuestion.setText(currentQuestion.getQuestion());
+            textViewQuestion.setText("Which type of breed is this?");
+
+            myImageView.setImageResource(currentQuestion.getResourceId());
             rBtn1.setText(currentQuestion.getOption1());
             rBtn2.setText(currentQuestion.getOption2());
             rBtn3.setText(currentQuestion.getOption3());

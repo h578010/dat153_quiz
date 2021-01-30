@@ -1,30 +1,30 @@
 package com.hvl.dat153.dogquiz;
 
-public class Questions {
-    private String question;
+public class Question {
+    private int resourceId;
     private String option1;
     private String option2;
     private String option3;
     private int answerNo;
 
-    public Questions() {
+    public Question() {
 
     }
 
-    public Questions (String question, String option1, String option2, String option3, int answerNo) {
-        this.question = question;
+    public Question(int resourceId, String option1, String option2, String option3, int answerNo) {
+        this.resourceId = resourceId;
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
         this.answerNo = answerNo;
     }
 
-    public String getQuestion() {
-        return question;
+    public int getResourceId() {
+        return resourceId;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
     }
 
     public String getOption1() {

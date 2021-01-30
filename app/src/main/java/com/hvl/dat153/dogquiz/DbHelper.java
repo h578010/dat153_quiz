@@ -51,21 +51,21 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     private void fillQuestionsTable() {
-        Questions q1 = new Questions("A is correct", "A", "B", "C", 1);
+        Question q1 = new Question(R.drawable.bernhard, "Bear Dog", "Teddy Dog", "Saint Bernhard", 3);
         addQuestion(q1);
-        Questions q2 = new Questions("B is correct", "A", "B", "C", 2);
+        Question q2 = new Question(R.drawable.bichon, "Bichon Frisé", "Circus Dog", "Cotton Shepherd", 1);
         addQuestion(q2);
-        Questions q3 = new Questions("C is correct", "A", "B", "C", 3);
+        Question q3 = new Question(R.drawable.bordercollie, "Happy Hunter", "Border Collie", "Energy Dog", 2);
         addQuestion(q3);
-        Questions q4 = new Questions("A is correct again", "A", "B", "C", 1);
+        Question q4 = new Question(R.drawable.foldenretriever, "Golden Retriever", "Yellow Ranger", "Cuddly Dog", 1);
         addQuestion(q4);
-        Questions q5 = new Questions("B is correct again", "A", "B", "C", 2);
+        Question q5 = new Question(R.drawable.germanshepherd, "Greenland Shepherd", "German Shepherd", "Cuban Shepherd", 2);
         addQuestion(q5);
     }
 
-    private void addQuestion(Questions question) {
+    private void addQuestion(Question question) {
         ContentValues cv = new ContentValues();
-        cv.put(QuestionsTable.COLUMN_QUESTION, question.getQuestion());
+        cv.put(QuestionsTable.COLUMN_QUESTION, question.getResourceId());
         cv.put(QuestionsTable.COLUMN_OPTION1, question.getOption1());
         cv.put(QuestionsTable.COLUMN_OPTION2, question.getOption2());
         cv.put(QuestionsTable.COLUMN_OPTION3, question.getOption3());
@@ -73,15 +73,15 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert(QuestionsTable.TABLE_NAME, null, cv);
     }
 
-    public List<Questions> getAllQuestions() {
-        List<Questions> questionList = new ArrayList<>();
+    public List<Question> getAllQuestions() {
+        List<Question> questionList = new ArrayList<>();
         db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME, null);
 
         if(c.moveToFirst()) {
             do {
-                Questions question = new Questions();
-                question.setQuestion(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
+                Question question = new Question();
+                question.setResourceId(c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
                 question.setOption1(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
                 question.setOption1(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
                 question.setOption2(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION2)));
