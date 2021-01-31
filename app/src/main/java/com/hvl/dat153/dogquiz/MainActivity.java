@@ -28,8 +28,15 @@ public class MainActivity extends AppCompatActivity {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startQuiz();
+            }
+        });
+
+        Button buttonAdd = findViewById(R.id.button_add);
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addPics();
             }
         });
     }
@@ -69,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    public void addPics(View view) {
-
+    public void addPics() {
+        Intent i = new Intent(MainActivity.this, AddActivity.class);
+        startActivity(i);
     }
 }
