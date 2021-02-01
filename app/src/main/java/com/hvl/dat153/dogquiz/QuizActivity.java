@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
@@ -58,7 +59,8 @@ public class QuizActivity extends AppCompatActivity {
         questionList = dbHelper.getAllQuestions();
         questionCountTotal = questionList.size();
         textViewScore.setText("Score: " + score + "/" + questionCountTotal);
-        // Collections.shuffle(questionList);
+
+        Collections.shuffle(questionList);
 
         showNextQuestion();
         answerBtn.setOnClickListener(new View.OnClickListener() {
