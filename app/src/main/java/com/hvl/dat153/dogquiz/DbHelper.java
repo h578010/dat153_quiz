@@ -56,7 +56,7 @@ public class DbHelper extends SQLiteOpenHelper {
         addQuestion(q2,db);
         Question q3 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.bordercollie, "Happy Hunter", "Border Collie", "Energy Dog", 2);
         addQuestion(q3,db);
-        Question q4 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.foldenretriever, "Golden Retriever", "Yellow Ranger", "Cuddly Dog", 1);
+        Question q4 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.goldenretriever, "Golden Retriever", "Yellow Ranger", "Cuddly Dog", 1);
         addQuestion(q4,db);
         Question q5 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.germanshepherd, "Greenland Shepherd", "German Shepherd", "Cuban Shepherd", 2);
         addQuestion(q5,db);
