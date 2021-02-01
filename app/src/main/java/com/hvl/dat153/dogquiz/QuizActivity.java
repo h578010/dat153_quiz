@@ -122,15 +122,15 @@ public class QuizActivity extends AppCompatActivity {
         switch (currentQuestion.getAnswerNo()) {
             case 1:
                 rBtn1.setTextColor(Color.GREEN);
-                textViewQuestion.setText("Answer 1 is correct.");
+                textViewQuestion.setText("The answer is " + currentQuestion.getOption1());
                 break;
             case 2:
                 rBtn2.setTextColor(Color.GREEN);
-                textViewQuestion.setText("Answer 2 is correct.");
+                textViewQuestion.setText("The answer is " + currentQuestion.getOption2());
                 break;
             case 3:
                 rBtn3.setTextColor(Color.GREEN);
-                textViewQuestion.setText("Answer 3 is correct.");
+                textViewQuestion.setText("The answer is " + currentQuestion.getOption3());
                 break;
         }
 
