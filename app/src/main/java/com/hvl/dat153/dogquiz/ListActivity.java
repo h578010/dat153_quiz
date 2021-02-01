@@ -20,10 +20,10 @@ public class ListActivity extends AppCompatActivity {
     private String imageUri[];
 
     private String countryNames[] = {
-            "India",
-            "China",
-            "Nepal",
-            "Bhutan"
+            "Saint Bernhard",
+            "Bichon Frisé",
+            "Border Collie",
+            "Old English Sheepdog"
     };
 
     private Integer images[] = {
