@@ -39,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
                 addPics();
             }
         });
+
+        Button buttonShow = findViewById(R.id.button_show);
+        buttonShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDogs();
+            }
+        });
     }
 
     private void startQuiz() {
@@ -78,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void addPics() {
         Intent i = new Intent(MainActivity.this, AddActivity.class);
+        startActivity(i);
+    }
+
+    public void showDogs() {
+        Intent i = new Intent(MainActivity.this, ListActivity.class);
         startActivity(i);
     }
 }
