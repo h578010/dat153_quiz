@@ -1,6 +1,8 @@
 package com.hvl.dat153.dogquiz;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +14,14 @@ import java.util.List;
 public class MyListActivity extends ListActivity {
     private ListView listView;
     private List<Question> questions;
+    private ListActivity self;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        self = this;
 
         // Populating lists
         DbHelper dbHelper = new DbHelper(this);
@@ -35,14 +40,22 @@ public class MyListActivity extends ListActivity {
         CustomDogList customDogList = new CustomDogList(this, questions);
         listView.setAdapter(customDogList);
 
-        // Selecting an item in list and holding it will delete, TODO: add confirmation dialog!
+        // Selecting an item in list and holding it will make an alert dialog ask if you want to delete question
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
-                int id = questions.get(position - 1).getId();
-                dbHelper.deleteId(id);
-                customDogList.remove(customDogList.getItem(position - 1));
-                customDogList.notifyDataSetChanged();
+                new AlertDialog.Builder(self)
+                        .setMessage("Do you really want to delete this question?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                int id = questions.get(position - 1).getId();
+                                dbHelper.deleteId(id);
+                                customDogList.remove(customDogList.getItem(position - 1));
+                                customDogList.notifyDataSetChanged();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
                 return false;
             }
         });
