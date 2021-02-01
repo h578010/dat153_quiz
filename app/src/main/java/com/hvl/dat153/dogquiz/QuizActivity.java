@@ -3,7 +3,9 @@ package com.hvl.dat153.dogquiz;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -84,8 +86,8 @@ public class QuizActivity extends AppCompatActivity {
         if (questionCounter < questionCountTotal) {
             currentQuestion = questionList.get(questionCounter);
             textViewQuestion.setText("Which type of breed is this?");
-
-            questionImage.setImageResource(currentQuestion.getResourceId());
+            Uri imageUri = Uri.parse(currentQuestion.getImageUri());
+            questionImage.setImageURI(imageUri);
             rBtn1.setText(currentQuestion.getOption1());
             rBtn2.setText(currentQuestion.getOption2());
             rBtn3.setText(currentQuestion.getOption3());

@@ -2,15 +2,20 @@ package com.hvl.dat153.dogquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Application;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
+import java.util.SortedMap;
 
 public class AddActivity extends AppCompatActivity {
     public static final int PICK_IMAGE = 1;
@@ -18,6 +23,10 @@ public class AddActivity extends AppCompatActivity {
     private ImageView imageView;
     private Button selectBtn;
     private EditText editText;
+    private String imageString;
+    private String name;
+    private Uri imageUri;
+    private boolean selected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +48,20 @@ public class AddActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (selected && !editText.getText().toString().isEmpty()) {
+                    makeQuestion();
+                    finish();
+                } else {
+                    Toast.makeText(AddActivity.this, "Please select an image and fill in a name", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
     }
 
     private void selectImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
     }
 
@@ -58,16 +71,24 @@ public class AddActivity extends AppCompatActivity {
 
         if (requestCode == PICK_IMAGE) {
             if (resultCode == RESULT_OK && data != null) {
-                Uri imageUri = data.getData();
+                imageUri = data.getData();
+
+                ContentResolver cr = getContentResolver();
+                final int takeFlags = data.getFlags()
+                        & (Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+                cr.takePersistableUriPermission(imageUri,takeFlags);
+
                 imageView.setImageURI(imageUri);
-                String imageString = imageUri.getPath();
-                System.out.println(imageString);
+                selected = true;
             }
         }
     }
 
-    private void makeQuestion(File image) {
-
-
+    private void makeQuestion() {
+        Question q = new Question(imageUri.toString(), "Papillon", "Poppi", "Prumpi", 1);
+        DbHelper db = new DbHelper(this);
+        db.addQuestion(q, null);
     }
 }

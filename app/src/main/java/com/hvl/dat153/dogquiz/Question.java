@@ -1,7 +1,7 @@
 package com.hvl.dat153.dogquiz;
 
 public class Question {
-    private int resourceId;
+    private String imageUri;
     private String option1;
     private String option2;
     private String option3;
@@ -11,20 +11,20 @@ public class Question {
 
     }
 
-    public Question(int resourceId, String option1, String option2, String option3, int answerNo) {
-        this.resourceId = resourceId;
+    public Question(String imageUri, String option1, String option2, String option3, int answerNo) {
+        this.imageUri = imageUri;
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
         this.answerNo = answerNo;
     }
 
-    public int getResourceId() {
-        return resourceId;
+    public String getImageUri() {
+        return imageUri;
     }
 
-    public void setResourceId(int resourceId) {
-        this.resourceId = resourceId;
+    public void setImageUri(String resourceId) {
+        this.imageUri = resourceId;
     }
 
     public String getOption1() {

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import com.hvl.dat153.dogquiz.Contract.*;
 
 import androidx.annotation.Nullable;
@@ -14,9 +16,7 @@ import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "DogQuiz.db";
-    private static final int DATABASE_VERSION = 1;
-
-    private SQLiteDatabase db;
+    private static final int DATABASE_VERSION = 5;
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -28,7 +28,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        this.db = db;
 
         final String SQL_CREATE_QUESTIONS_TABLE = "CREATE TABLE " +
                 QuestionsTable.TABLE_NAME + " (" +
@@ -41,7 +40,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 ")";
 
         db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
-        fillQuestionsTable();
+        fillQuestionsTable(db);
     }
 
     @Override
@@ -50,38 +49,53 @@ public class DbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    private void fillQuestionsTable() {
-        Question q1 = new Question(R.drawable.bernhard, "Bear Dog", "Teddy Dog", "Saint Bernhard", 3);
-        addQuestion(q1);
-        Question q2 = new Question(R.drawable.bichon, "Bichon Frisé", "Circus Dog", "Cotton Shepherd", 1);
-        addQuestion(q2);
-        Question q3 = new Question(R.drawable.bordercollie, "Happy Hunter", "Border Collie", "Energy Dog", 2);
-        addQuestion(q3);
-        Question q4 = new Question(R.drawable.foldenretriever, "Golden Retriever", "Yellow Ranger", "Cuddly Dog", 1);
-        addQuestion(q4);
-        Question q5 = new Question(R.drawable.germanshepherd, "Greenland Shepherd", "German Shepherd", "Cuban Shepherd", 2);
-        addQuestion(q5);
+    private void fillQuestionsTable(SQLiteDatabase db) {
+        Question q1 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.bernhard, "Bear Dog", "Teddy Dog", "Saint Bernhard", 3);
+        addQuestion(q1,db);
+        Question q2 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.bichon, "Bichon Frisé", "Circus Dog", "Cotton Shepherd", 1);
+        addQuestion(q2,db);
+        Question q3 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.bordercollie, "Happy Hunter", "Border Collie", "Energy Dog", 2);
+        addQuestion(q3,db);
+        Question q4 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.foldenretriever, "Golden Retriever", "Yellow Ranger", "Cuddly Dog", 1);
+        addQuestion(q4,db);
+        Question q5 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.germanshepherd, "Greenland Shepherd", "German Shepherd", "Cuban Shepherd", 2);
+        addQuestion(q5,db);
+        Question q6 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.oldenglishsheepdog, "Fluffy Delight", "Labbetuss", "Old English Sheepdog", 3);
+        addQuestion(q6,db);
     }
 
-    private void addQuestion(Question question) {
+    public void addQuestion(Question question, SQLiteDatabase db) {
+        if(db==null) {
+            db = getWritableDatabase();
+        }
+
         ContentValues cv = new ContentValues();
-        cv.put(QuestionsTable.COLUMN_QUESTION, question.getResourceId());
+        cv.put(QuestionsTable.COLUMN_QUESTION, question.getImageUri());
         cv.put(QuestionsTable.COLUMN_OPTION1, question.getOption1());
         cv.put(QuestionsTable.COLUMN_OPTION2, question.getOption2());
         cv.put(QuestionsTable.COLUMN_OPTION3, question.getOption3());
         cv.put(QuestionsTable.COLUMN_ANSWER_NO, question.getAnswerNo());
-        db.insert(QuestionsTable.TABLE_NAME, null, cv);
+
+        try {
+            db.beginTransaction();
+            db.insertOrThrow(QuestionsTable.TABLE_NAME, null, cv);
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.d("Synne", e.getMessage());
+        } finally {
+            db.endTransaction();
+        }
     }
 
     public List<Question> getAllQuestions() {
         List<Question> questionList = new ArrayList<>();
-        db = getReadableDatabase();
+        SQLiteDatabase  db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME, null);
 
         if(c.moveToFirst()) {
             do {
                 Question question = new Question();
-                question.setResourceId(c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
+                question.setImageUri(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
                 question.setOption1(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
                 question.setOption1(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
                 question.setOption2(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION2)));

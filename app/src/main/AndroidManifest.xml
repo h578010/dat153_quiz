@@ -10,17 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DogQuiz">
-        <activity android:name=".AddActivity"></activity>
 
-        <uses-library
-            android:name="com.google.android.maps"
-            android:required="false" />
-
+        <activity android:name=".AddActivity" />
         <activity android:name=".QuizActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
