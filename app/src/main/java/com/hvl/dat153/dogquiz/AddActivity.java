@@ -25,9 +25,6 @@ public class AddActivity extends AppCompatActivity {
     private EditText editText;
     private EditText editText2;
     private EditText editText3;
-    private String answer;
-    private String option2;
-    private String option3;
     private Uri imageUri;
     private boolean selected = false;
 
@@ -57,7 +54,9 @@ public class AddActivity extends AppCompatActivity {
                     makeQuestion();
                     finish();
                 } else {
-                    Toast.makeText(AddActivity.this, "Please select an image and fill in a name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddActivity.this,
+                            "Please select an image and fill in a name",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -87,15 +86,15 @@ public class AddActivity extends AppCompatActivity {
 
                 imageView.setImageURI(imageUri);
                 selected = true;
-                answer = editText.getText().toString();
-                option2 = editText2.getText().toString();
-                option3 = editText3.getText().toString();
             }
         }
     }
 
     private void makeQuestion() {
-        Question q = new Question(imageUri.toString(), answer, option2, option3, 1);
+        Question q = new Question(imageUri.toString(),
+                editText.getText().toString(),
+                editText2.getText().toString(),
+                editText3.getText().toString(), 1);
         DbHelper db = new DbHelper(this);
         db.addQuestion(q, null);
     }

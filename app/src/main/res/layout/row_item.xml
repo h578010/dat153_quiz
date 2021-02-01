@@ -3,11 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     <ImageView
-
         android:layout_rowSpan="2"
         android:layout_width="80dp"
         android:layout_height="70dp"
-
         android:scaleType="fitXY"
         android:id="@+id/imageViewDog"
         android:layout_row="0"
@@ -18,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_columnWeight="1"
         android:layout_marginLeft="10dp"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:textColor="#1E90FF"
         android:id="@+id/textViewDog"
         android:layout_row="0"

@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showDogs() {
-        Intent i = new Intent(MainActivity.this, ListActivity.class);
+        Intent i = new Intent(MainActivity.this, MyListActivity.class);
         startActivity(i);
     }
 }

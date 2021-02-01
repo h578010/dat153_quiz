@@ -16,7 +16,7 @@ import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "DogQuiz.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 16;
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -60,7 +60,7 @@ public class DbHelper extends SQLiteOpenHelper {
         addQuestion(q4,db);
         Question q5 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.germanshepherd, "Greenland Shepherd", "German Shepherd", "Cuban Shepherd", 2);
         addQuestion(q5,db);
-        Question q6 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.oldenglishsheepdog, "Fluffy Delight", "Labbetuss", "Old English Sheepdog", 3);
+        Question q6 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.beardedcollie, "Fluffy Delight", "Labbetuss", "Bearded Collie", 3);
         addQuestion(q6,db);
     }
 
@@ -95,6 +95,7 @@ public class DbHelper extends SQLiteOpenHelper {
         if(c.moveToFirst()) {
             do {
                 Question question = new Question();
+                question.setId(c.getInt(c.getColumnIndex(QuestionsTable._ID)));
                 question.setImageUri(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
                 question.setOption1(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
                 question.setOption1(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
@@ -108,21 +109,8 @@ public class DbHelper extends SQLiteOpenHelper {
         return questionList;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void deleteId(int id) {
+        SQLiteDatabase myDB = this.getWritableDatabase();
+        myDB.execSQL("DELETE FROM " + QuestionsTable.TABLE_NAME + " WHERE " + QuestionsTable._ID + " = " + id);
+    }
 }

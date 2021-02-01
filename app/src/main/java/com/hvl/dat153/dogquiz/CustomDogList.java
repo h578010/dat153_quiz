@@ -8,19 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.util.List;
 
 public class CustomDogList extends ArrayAdapter {
 
-    private String[] dogNames;
-    private Integer[] imageId;
     private Activity context;
-    private Uri [] imageUris;
+    private List<Question> questions;
 
-    public CustomDogList(Activity context, String[] dogNames, Integer[] imageId) {
-        super(context, R.layout.row_item, dogNames);
+    public CustomDogList(Activity context, List<Question> questions) {
+        super(context, R.layout.row_item, questions);
         this.context = context;
-        this.dogNames = dogNames;
-        this.imageId = imageId;
+        this.questions = questions;
     }
 
     @Override
@@ -33,8 +31,8 @@ public class CustomDogList extends ArrayAdapter {
         TextView textViewDog = (TextView) row.findViewById(R.id.textViewDog);
         ImageView imageDog = (ImageView) row.findViewById(R.id.imageViewDog);
 
-        textViewDog.setText(dogNames[position]);
-        imageDog.setImageResource(imageId[position]);
+        textViewDog.setText(questions.get(position).getCorrectOption());
+        imageDog.setImageURI(Uri.parse(questions.get(position).getImageUri()));
 
         return row;
     }
