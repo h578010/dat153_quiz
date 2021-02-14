@@ -51,24 +51,25 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private void fillQuestionsTable(SQLiteDatabase db) {
         Question q1 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.bernhard, "Bear Dog", "Teddy Dog", "Saint Bernhard", 3);
-        addQuestion(q1,db);
+        addQuestionInDb(q1, db);
         Question q2 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.bichon, "Bichon Frisé", "Circus Dog", "Cotton Shepherd", 1);
-        addQuestion(q2,db);
+        addQuestionInDb(q2, db);
         Question q3 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.bordercollie, "Happy Hunter", "Border Collie", "Energy Dog", 2);
-        addQuestion(q3,db);
+        addQuestionInDb(q3, db);
         Question q4 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.goldenretriever, "Golden Retriever", "Yellow Ranger", "Cuddly Dog", 1);
-        addQuestion(q4,db);
+        addQuestionInDb(q4, db);
         Question q5 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.germanshepherd, "Greenland Shepherd", "German Shepherd", "Cuban Shepherd", 2);
-        addQuestion(q5,db);
+        addQuestionInDb(q5, db);
         Question q6 = new Question("android.resource://com.hvl.dat153.dogquiz/" + R.drawable.beardedcollie, "Fluffy Delight", "Labbetuss", "Bearded Collie", 3);
-        addQuestion(q6,db);
+        addQuestionInDb(q6, db);
     }
 
-    public void addQuestion(Question question, SQLiteDatabase db) {
-        if(db==null) {
-            db = getWritableDatabase();
-        }
+    public void addQuestion(Question question) {
+        SQLiteDatabase db = getWritableDatabase();
+        addQuestionInDb(question, db);
+    }
 
+    private void addQuestionInDb(Question question, SQLiteDatabase db) {
         ContentValues cv = new ContentValues();
         cv.put(QuestionsTable.COLUMN_QUESTION, question.getImageUri());
         cv.put(QuestionsTable.COLUMN_OPTION1, question.getOption1());
@@ -89,7 +90,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public List<Question> getAllQuestions() {
         List<Question> questionList = new ArrayList<>();
-        SQLiteDatabase  db = getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME, null);
 
         if(c.moveToFirst()) {
@@ -110,7 +111,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public void deleteId(int id) {
-        SQLiteDatabase myDB = this.getWritableDatabase();
-        myDB.execSQL("DELETE FROM " + QuestionsTable.TABLE_NAME + " WHERE " + QuestionsTable._ID + " = " + id);
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM " + QuestionsTable.TABLE_NAME + " WHERE " + QuestionsTable._ID + " = " + id);
     }
 }

@@ -96,6 +96,6 @@ public class AddActivity extends AppCompatActivity {
                 editText2.getText().toString(),
                 editText3.getText().toString(), 1);
         DbHelper db = new DbHelper(this);
-        db.addQuestion(q, null);
+        db.addQuestion(q);
     }
 }
