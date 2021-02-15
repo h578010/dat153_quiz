@@ -25,6 +25,7 @@ public class AddActivity extends AppCompatActivity {
     private EditText editText;
     private Uri imageUri;
     private boolean selected = false;
+    private DogRoomDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class AddActivity extends AppCompatActivity {
         imageView = findViewById(R.id.image);
         selectBtn = findViewById(R.id.select_btn);
         editText = findViewById(R.id.editText);
+
+        db = DogRoomDB.getDatabase(this);
 
         selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +81,7 @@ public class AddActivity extends AppCompatActivity {
                         & (Intent.FLAG_GRANT_READ_URI_PERMISSION
                         | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
-                cr.takePersistableUriPermission(imageUri,takeFlags);
+                //cr.takePersistableUriPermission(imageUri,takeFlags);
 
                 imageView.setImageURI(imageUri);
                 selected = true;
@@ -88,7 +91,10 @@ public class AddActivity extends AppCompatActivity {
 
     private void makeQuestion() {
         Dog d = new Dog(editText.getText().toString(),imageUri.toString());
-        DogRoomDB db = DogRoomDB.getDatabase(this);
         db.dogDao().insertDog(d);
+    }
+
+    public int getNoOfDogs() {
+        return db.dogDao().count();
     }
 }

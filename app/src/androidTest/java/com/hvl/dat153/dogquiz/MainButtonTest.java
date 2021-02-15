@@ -11,7 +11,6 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 
-
 @RunWith(AndroidJUnit4.class)
 public class MainButtonTest {
     @Rule
