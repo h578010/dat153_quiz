@@ -195,5 +195,8 @@ public class QuizActivity extends AppCompatActivity {
         finish();
     }
 
+    public int getScore() {
+        return score;
+    }
 
 }
