@@ -28,18 +28,8 @@ public class MyListActivity extends ListActivity {
 
         // Populating lists
         DogRoomDB db = DogRoomDB.getDatabase(this);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    questions = db.dogDao().getAllDogs();
-                } catch (Exception e) {
-                    //
-                } finally {
-                    db.close();
-                }
-            }
-        }).start();
+        questions = db.dogDao().getAllDogs();
+
 
         // Setting header
         TextView textView = new TextView(this);
