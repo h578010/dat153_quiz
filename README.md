@@ -1,9 +1,6 @@
 # dat153_quiz
 
-Three different tests were made. 
-DatabaseTest tests adding a new question/dog to the database.
-MainButtonTest tests that clicking the ADD-button on the main screen opens the activiy for adding new questions/dogs. 
-The QuizScoreTest tests that only right answers will give point during the quiz. 
+Three different tests were made: DatabaseTest for adding a new question/dog to the database. MainButtonTest that checks that clicking the Add button on the main screen opens the activiy for adding new questions/dogs. The QuizScoreTest for testing that only right answers will give points during the quiz. 
 
 ## Test results:
 
