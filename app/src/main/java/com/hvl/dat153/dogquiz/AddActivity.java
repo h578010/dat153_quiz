@@ -23,8 +23,6 @@ public class AddActivity extends AppCompatActivity {
     private ImageView imageView;
     private Button selectBtn;
     private EditText editText;
-    private EditText editText2;
-    private EditText editText3;
     private Uri imageUri;
     private boolean selected = false;
 
@@ -37,8 +35,6 @@ public class AddActivity extends AppCompatActivity {
         imageView = findViewById(R.id.image);
         selectBtn = findViewById(R.id.select_btn);
         editText = findViewById(R.id.editText);
-        editText2 = findViewById(R.id.editText2);
-        editText3 = findViewById(R.id.editText3);
 
         selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,11 +87,8 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private void makeQuestion() {
-        Question q = new Question(imageUri.toString(),
-                editText.getText().toString(),
-                editText2.getText().toString(),
-                editText3.getText().toString(), 1);
-        DbHelper db = new DbHelper(this);
-        db.addQuestion(q);
+        Dog d = new Dog(editText.getText().toString(),imageUri.toString());
+        DogRoomDB db = DogRoomDB.getDatabase(this);
+        db.dogDao().insertDog(d);
     }
 }

@@ -1,15 +1,16 @@
 package com.hvl.dat153.dogquiz;
 
 import android.os.AsyncTask;
+
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 import android.app.Application;
-import androidx.lifecycle.LiveData;
 
 public class DogRepository {
 
     private MutableLiveData<List<Dog>> searchResults = new MutableLiveData<>();
-    private LiveData<List<Dog>> allDogs;
+    private List<Dog> allDogs;
     private DogDao dogDao;
 
     public DogRepository(Application application) {
@@ -24,9 +25,9 @@ public class DogRepository {
         task.execute(newDog);
     }
 
-    public void deleteDog (String name) {
+    public void deleteDog (int id) {
         DeleteAsyncTask task = new DeleteAsyncTask(dogDao);
-        task.execute(name);
+        task.execute(id);
     }
 
     public void findDog (String name) {
@@ -35,16 +36,24 @@ public class DogRepository {
         task.execute(name);
     }
 
-    public LiveData<List<Dog>> getAllDogs() {
-        return allDogs;
-    }
-
     public MutableLiveData<List<Dog>> getSearchResults() {
         return searchResults;
     }
 
     private void asyncFinished(List<Dog> results) {
         searchResults.setValue(results);
+    }
+
+    public void addDog(Dog dog) {
+        insertDog(dog);
+    }
+
+    public void deleteId(int id) {
+        deleteDog(id);
+    }
+
+    public List<Dog> getAllDogs() {
+        return allDogs;
     }
 
     private static class QueryAsyncTask extends AsyncTask<String, Void, List<Dog>> {
@@ -78,13 +87,13 @@ public class DogRepository {
         }
     }
 
-    private static class DeleteAsyncTask extends AsyncTask<String, Void, Void> {
+    private static class DeleteAsyncTask extends AsyncTask<Integer, Void, Void> {
         private DogDao asyncTaskDao;
         DeleteAsyncTask(DogDao dao) {
             asyncTaskDao = dao;
         }
         @Override
-        protected Void doInBackground(final String... params) {
+        protected Void doInBackground(final Integer... params) {
             asyncTaskDao.deleteDog(params[0]);
             return null;
         }

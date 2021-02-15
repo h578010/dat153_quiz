@@ -15,11 +15,14 @@ public interface DogDao {
     @Query("SELECT * FROM dog_questions WHERE dogName = :name")
     List<Dog> findDog (String name);
 
-    @Query("DELETE FROM dog_questions WHERE dogName = :name")
-    void deleteDog (String name);
+    @Query("DELETE FROM dog_questions WHERE dogId = :id")
+    void deleteDog (int id);
 
     @Query("SELECT * FROM dog_questions")
-    LiveData<List<Dog>> getAllDogs();
+    List<Dog> getAllDogs();
+
+    @Query("SELECT COUNT(*) FROM dog_questions")
+    int count();
 }
 
 

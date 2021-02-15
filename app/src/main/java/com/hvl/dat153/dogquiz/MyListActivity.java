@@ -9,11 +9,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 public class MyListActivity extends ListActivity {
     private ListView listView;
-    private List<Question> questions;
+    private List<Dog> questions;
     private ListActivity self;
 
     @Override
@@ -24,8 +27,19 @@ public class MyListActivity extends ListActivity {
         self = this;
 
         // Populating lists
-        DbHelper dbHelper = new DbHelper(this);
-        questions = dbHelper.getAllQuestions();
+        DogRoomDB db = DogRoomDB.getDatabase(this);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    questions = db.dogDao().getAllDogs();
+                } catch (Exception e) {
+                    //
+                } finally {
+                    db.close();
+                }
+            }
+        }).start();
 
         // Setting header
         TextView textView = new TextView(this);
@@ -51,7 +65,7 @@ public class MyListActivity extends ListActivity {
 
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 int id = questions.get(position - 1).getId();
-                                dbHelper.deleteId(id);
+                                db.dogDao().deleteDog(id);
                                 customDogList.remove(customDogList.getItem(position - 1));
                                 customDogList.notifyDataSetChanged();
                             }})

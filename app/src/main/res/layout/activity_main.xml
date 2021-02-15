@@ -58,7 +58,6 @@
         android:layout_marginStart="145dp"
         android:layout_marginTop="460dp"
         android:layout_marginEnd="146dp"
-        android:layout_marginBottom="180dp"
         android:backgroundTint="@color/green"
         android:text="Start quiz"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +65,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.813" />
+        app:layout_constraintVertical_bias="0.372" />
 
     <Button
         android:id="@+id/button_add"
@@ -75,13 +74,14 @@
         android:layout_marginStart="135dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="135dp"
-        android:layout_marginBottom="122dp"
         android:backgroundTint="@color/green"
         android:text="Add pictures"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_start" />
+        app:layout_constraintTop_toBottomOf="@+id/button_start"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button_show"
@@ -90,12 +90,11 @@
         android:layout_marginStart="135dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="135dp"
-        android:layout_marginBottom="100dp"
         android:backgroundTint="@color/green"
         android:text="Show all dogs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_add"
         app:layout_constraintVertical_bias="0.0" />

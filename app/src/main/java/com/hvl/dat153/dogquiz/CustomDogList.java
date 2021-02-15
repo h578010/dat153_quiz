@@ -13,9 +13,9 @@ import java.util.List;
 public class CustomDogList extends ArrayAdapter {
 
     private Activity context;
-    private List<Question> questions;
+    private List<Dog> questions;
 
-    public CustomDogList(Activity context, List<Question> questions) {
+    public CustomDogList(Activity context, List<Dog> questions) {
         super(context, R.layout.row_item, questions);
         this.context = context;
         this.questions = questions;
@@ -31,7 +31,7 @@ public class CustomDogList extends ArrayAdapter {
         TextView textViewDog = (TextView) row.findViewById(R.id.textViewDog);
         ImageView imageDog = (ImageView) row.findViewById(R.id.imageViewDog);
 
-        textViewDog.setText(questions.get(position).getCorrectOption());
+        textViewDog.setText(questions.get(position).getAnswer());
         imageDog.setImageURI(Uri.parse(questions.get(position).getImageUri()));
 
         return row;

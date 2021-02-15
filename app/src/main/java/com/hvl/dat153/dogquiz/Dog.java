@@ -13,15 +13,17 @@ public class Dog {
     private int id;
 
     @ColumnInfo(name = "dogName")
-    private String name;
+    private String answer;
 
-    @ColumnInfo(name = "imageString")
-    private String imageString;
+    @ColumnInfo(name = "imageUri")
+    private String imageUri;
 
-    public Dog(int id, String name, String imageString) {
-        this.id = id;
-        this.name = name;
-        this.imageString = imageString;
+    public Dog() {
+
+    }
+    public Dog(String name, String imageString) {
+        this.answer = name;
+        this.imageUri = imageString;
     }
 
     public int getId() {
@@ -32,19 +34,19 @@ public class Dog {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAnswer(String name) {
+        this.answer = name;
     }
 
-    public String getImageString() {
-        return imageString;
+    public String getImageUri() {
+        return imageUri;
     }
 
-    public void setImageString(String imageString) {
-        this.imageString = imageString;
+    public void setImageUri(String imageString) {
+        this.imageUri = imageString;
     }
 }
