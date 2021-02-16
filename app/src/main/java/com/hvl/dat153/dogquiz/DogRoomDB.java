@@ -1,16 +1,11 @@
 package com.hvl.dat153.dogquiz;
 
 import android.content.Context;
-
-import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.util.concurrent.Executors;
-
-@Database(entities = {Dog.class}, version = 6, exportSchema = false)
+@Database(entities = {Dog.class}, version = 7, exportSchema = false)
 public abstract class DogRoomDB extends RoomDatabase {
     public abstract DogDao dogDao();
     private static DogRoomDB INSTANCE;
