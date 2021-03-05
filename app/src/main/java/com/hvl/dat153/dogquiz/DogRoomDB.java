@@ -5,7 +5,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Dog.class}, version = 7, exportSchema = false)
+@Database(entities = {Dog.class}, version = 8, exportSchema = false)
 public abstract class DogRoomDB extends RoomDatabase {
     public abstract DogDao dogDao();
     private static DogRoomDB INSTANCE;
@@ -44,7 +44,7 @@ public abstract class DogRoomDB extends RoomDatabase {
         Dog dog7 = new Dog("German Shepherd", "android.resource://com.hvl.dat153.dogquiz/" + R.drawable.germanshepherd);
         dogDao().insertDog(dog7);
         Dog dog8 = new Dog("Saint Bernhard", "android.resource://com.hvl.dat153.dogquiz/" + R.drawable.bernhard);
-        dogDao().insertDog(dog6);
+        dogDao().insertDog(dog8);
     }
 
 }
